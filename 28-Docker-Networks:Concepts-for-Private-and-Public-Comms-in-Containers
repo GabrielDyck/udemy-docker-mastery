@@ -1,3 +1,51 @@
 28. Docker Networks: Concepts for Private and Public Comms in Containers
 
+docker container port <container> - describe el puerto en 
+                                    el cual el contendor esta activo
 
+
+get container ip:
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container-name>
+Esta ip es una ip virtual de docker.
+Con el argument -p 8080:80  El puerto que bindeamos es el puerto virtual de la red virtual de docker y el puerto de nuestro host.
+
+Por ende, si bindeamos el port 8080:80 significa que todo el trafico que recibamos en nuestro host en el puerto 8080 va a estar redirigido a 
+nuestra red virtual de docker al puerto 80.
+
+Esta red privada solamente es alcanzable si configuramos los puertos con el comando -p(publish).
+De otra forma, las redes virtuales no van a tenre conexion entre si. SI tienen conexion los containers que esten dentro de una
+misma conexion virtual.
+
+
+docker network ls - show Networks
+docker network inspect <network>- inspect network
+docker network create --drive - create network
+docker network connect - attach a network to container
+docker network disconnect - detach a network from container
+
+docker network ls
+nos retorna por defecto, 3 networks,
+bringe, host y name
+La red "bridge" es la red virtual de docker por defecto, que esta nateada detras del host ip 
+
+
+La red none removes eth0 and only leaves you wityh localhosy interface in containers
+La red host: ommit docker virtual network and connect the container throught host(PC) interface it gains performance by skipping virtual networks but sacrefices security of container model
+
+network driver: built in or 3rd party extensions that give your virtual network features
+
+Crear red virtual: 
+docker network create my_app_net  --- (Crea una red con el driver bridge)
+docker network ls (podemos ver en la consola todas las redes conectadas)
+
+Ejecutar un container dentro de una red virtual
+Creando un container dentro de una red ya creada
+
+docker container run -d --name new_nginx --network my_app_net nginx
+
+docker network inspect my_app_net ( podremos ver el container new_nginx dentro de esta red)
+
+Conectado un container ya existente a una red: (lo va a agregar a la red que establecimos, y va a seguir estando conectado con las redes configuradas anteriormente)
+docker network connect <red> <container>   -- dynamically creates a NIC in a container on an existing virtual network
+
+docker network disconnect <red> <container>  --- dynamically removes a NIC from a container on a specific virtual network
