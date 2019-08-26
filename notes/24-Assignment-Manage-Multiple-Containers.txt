@@ -1,0 +1,66 @@
+24. Assignment: Manage Multiple Containers
+
+
+docker container rm <nombre container>     -   Borra el container 
+
+-d: --detach Ejecutar proceso fuera de la consola
+-p : --port puerto
+--name : Nombre del contenedor
+-e : environment values: Se peuden apsarar variables de ambiente
+
+docker container run ...
+Busca la imagen nginx en mi cache de imagenes locales, si no la encuentra la 
+va a buscar a docker hub. Por defecto al no definirle la version que quiero descargar
+descarga la ultima. Puedo descargr una version particular  de la siguiente manera: "... nginx:<version>"   
+
+
+
+Levantar un contenedor con nginx en el puerto 80,
+ en un proceso distinto al de la consola, y ponerle de nombre al contenedor nginx
+
+"docker container run -d -p 80:80 --name nginx nginx"
+docker containter ls  -> Esta activo nginx
+
+Levantar un contenedor con mysql en el puerto 3306,
+"docker container run -d -p 3307:3307 -e MYSQL_RANDOM_ROOT_PASSWORD=yes --name mysql mysql"
+
+
+Levantar un contenedor con httpd en el puerto 8080
+"docker container run -d -p 8080:8080 --name httpd httpd"
+
+"docker container logs mysql" - > mirar los logs de un container
+
+docker container stop <name> -> para la ejecucion del container
+
+docker container rm <name> -> borra el container
+
+
+docker container ls -> containers en estado UP
+docker container ls -a -> todos los container ( -a = all)
+
+
+
+
+
+Comandos de management sobre los containers
+
+docker container top <container>- > procesos corriendo en el container
+docker container inspect <container>-> configuracion del container
+docker container stat <container>-> estado de performance del container
+
+
+
+ /***** -it : 
+            1. -t/--tty:in docker helps simulates a terminal like what ssh does
+            2. -i/--interractive:  keep stdin open even if no attached
+
+docker container run -it <container> - > Crea un container y me conecta a una consola para ejecutar comandos dentro de la misma
+docker container run exec -it <container> ->  ejecuta un comando extra en un container ya existente 
+
+El comando que corre en el container es el ultimo que ejecutamos en el comand run
+
+
+docker pull <image> -- pull latest version
+
+
+docker image ls
