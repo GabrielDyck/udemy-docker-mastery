@@ -49,3 +49,24 @@ Conectado un container ya existente a una red: (lo va a agregar a la red que est
 docker network connect <red> <container>   -- dynamically creates a NIC in a container on an existing virtual network
 
 docker network disconnect <red> <container>  --- dynamically removes a NIC from a container on a specific virtual network
+
+
+
+
+
+Docker Networks DNS:
+
+Forget Ip's:
+Static IP's and using IP's for taling to containers is an antipattern.
+Do your best to avoid it.
+
+
+When docker run, docker build a dns with the name of the container and bind that dns with
+the container ip:port in the configured network.
+Example:
+
+docker container exec -it my_nginx ping new_nginx -- hago un ping desde my_nginx a new_nginx(dns de new_nginx) 
+y vemos que resuelve el dns correctamente el dns del container.
+
+Esto es porque, la red virtual del docker tiene la ventaja de crea los dns con el nombre del container
+Docker, asociar un dns con un contenedor, con el argumento --link
