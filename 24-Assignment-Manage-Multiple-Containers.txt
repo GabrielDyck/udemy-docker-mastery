@@ -52,10 +52,10 @@ docker container stat <container>-> estado de performance del container
 
  /***** -it : 
             1. -t/--tty:in docker helps simulates a terminal like what ssh does
-            2. -i/--interractive:  keep stdin open even if no attached
+            2. -i/--interactive:  keep stdin open even if no attached
 
-docker container run -it <container> - > Crea un container y me conecta a una consola para ejecutar comandos dentro de la misma
-docker container run exec -it <container> ->  ejecuta un comando extra en un container ya existente 
+docker container run -it <container>  <command> -> Crea un container y me conecta a una consola para ejecutar comandos dentro de la misma
+docker container run exec -it <container> <command> ->  ejecuta un comando extra en un container ya existente 
 
 El comando que corre en el container es el ultimo que ejecutamos en el comand run
 

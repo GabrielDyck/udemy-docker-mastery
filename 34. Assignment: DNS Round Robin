@@ -1,0 +1,19 @@
+34. Assignment: DNS Round Robin Test
+
+#Creo la red
+docker network create net_search
+
+#Creo los containers agregandolos a la red virtual creada anteriormente
+docker container run -d -network net_search --network-alias search_app --name elastic_search-01 elasticsearch:2
+docker container run -d -network net_search --network-alias search_app --name elastic_search-02 elasticsearch:2
+
+#Verifico estando dentro de la red que estan ejecutandose los contenedores
+docker container run --rm --net net_search alpine nslookup search_app
+
+#Corroboro que la red tiene conectada los dos containers de elastic
+docker network inspect net_search
+
+
+
+#Corroboro que puedo alcanzar a un container desde otro dentro de la misma red(esto es asi porque aun no hice publico los peurtos de la red virtual)
+docker container run --rm --net net_search centos curl -s search_app:9200
