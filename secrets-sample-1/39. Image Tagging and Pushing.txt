@@ -1,0 +1,45 @@
+39. Image Tagging and Pushing to
+Docker Hub
+
+docker image tag  -- asising one or more tags to an image
+
+Forma de referirse a una imagen(3 campo de informacion):
+<user>/<repo>:<tag>       - default tag is latests if no specified
+
+
+
+docker image latests
+
+repository: <username/image>  - Forma de ver un repositorio
+                              -  Official repository: they live at te "root namespace" of the registry, so they don't need account name in front of repo name
+
+Example:
+ docker pull mysql/mysql-server
+
+ docker image ls
+
+ ## mysql/mysql-server
+ ## mysql 
+
+
+Tags:
+
+una imagen puede tener distintos tags. DOcker es lo suficientemente inteligente para darse cuenta de esto
+Nosotros podemos taggear nuevamente una imagen con el comando:
+
+docker image tag <tag-origen> <tag-destino>
+
+el tag "latest" no significa que siempre sea la ultima version. SI no que es el tag por defecto, los creadores de imagenes deberian asignar este tag a las nuevas versiones estables.
+
+Eg:
+Creo imagen con el tag:
+docker image tag nginx gabrieldyck/nginx
+
+Push a docker hub:
+docker image push gabrieldyck/nginx
+
+No sin antes autenticar
+
+docker login ...
+
+docker logout

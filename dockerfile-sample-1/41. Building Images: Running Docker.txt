@@ -1,0 +1,19 @@
+41. Building Images: Running Docker
+Builds
+
+-t: tag name
+docker image build -t customnginx <dockerfile>
+
+
+Cada step es una linea del dockerfile. Al termianr de ejecutar cada step devuelve un hash de esa linea que es guardado en la cache.
+Si esa linea, al volver a hacer un build no ha cambiado, no volver a vovler a ejecutarlo ya que ya lo ha hecho.
+
+ DOcker file se ejecuta de arriba hacia abajo. 
+ Lo mas performante a la hora de crear un docker file:
+ Arriba hay que cambiar lo menos posible, asi se avanza con las compilaciones cacheadas, ya que
+ apartir del primer cambio, se ejecuta nuevamente el step de docker.
+
+
+
+
+ Keywork WORKDIR para cambiar de directory en vez de RUN command con un cd

@@ -1,2 +1,6 @@
 38. Images and Their Layers: Discover
 the Image Cache
+
+docker image history <image>- show layer of changes made in image
+dokcer image inspect <image>- return json of metadata about the image
+
